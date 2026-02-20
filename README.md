@@ -113,30 +113,6 @@ Type **any** city name:
 
 If the city isn’t in the database, the app fetches **live weather** using Open‑Meteo.
 
-###  Fuzzy Search  
-Even messy inputs work:
-
-- `ldn` → London  
-- `brln` → Berlin  
-- `ams` → Amsterdam  
-
-###  Weather Icons  
-Weather conditions are displayed with emoji:
-
--  Clear sky  
--  Rain  
--  Snow  
--  Thunderstorm  
-
-###  Rich UI (optional)  
-If `rich` is installed:
-
-- Color tables  
-- Borders  
-- Panels  
-
-If not installed → plain fallback.
-
 ---
 
 #  Web UI (Streamlit)
