@@ -149,25 +149,24 @@ bash
 python -m unittest discover -s tests -p "test_*.py" -v
 
 ##  Project Structure
+
 weatherdashboard/
-    main.py                 # ETL pipeline
-    terminal_app.py         # Terminal weather viewer
-    web_app.py              # Streamlit dashboard
-    launcher.py             # Unified launcher
+    main.py
+    terminal_app.py
+    web_app.py
+    launcher.py
     Dockerfile
     requirements.txt
-    Makefile                # Linux/macOS automation
-    make.bat                # Windows automation
+    Makefile
+    make.bat
     .gitignore
-
-    tests/                  # unittest suite
+    tests/
         __init__.py
         test_weather_mapping.py
         test_temperature_conversion.py
         test_etl.py
         test_terminal_helpers.py
         test_web_helpers.py
-
     
 ##  Configuration
 Weather Mapping
