@@ -1,69 +1,50 @@
-
-# 🌦️ Weather App — ETL + Terminal UI + Web UI
-
-A complete weather application that:
-
-- Fetches real‑time weather data (ETL pipeline)  
-- Stores it in a SQLite database  
-- Lets users view weather in a **terminal UI** or **web UI**  
-- Supports **global city search**, **fuzzy matching**, and **weather icons**  
-- Includes a powerful **launcher** with diagnostics, ETL, and database tools  
-
-This project is designed to be user‑friendly, robust, and easy to run on any machine.
-
+#  Weather App — ETL + Terminal UI + Web UI
 ---
 
-# 📁 Project Structure
+#  Features at a Glance
 
-```
-weather-app/
-│
-├── main.py              # ETL pipeline (fetch + load)
-├── terminal_app.py      # Terminal UI (fuzzy search + icons + live API)
-├── web_app.py           # Streamlit web UI
-├── launcher.py          # Main menu (Terminal/Web/ETL/Diagnostics/Reset DB)
-├── init_db.py           # Auto-creates weather.db if missing
-│
-├── requirements.txt     # Dependencies
-├── README.md            # Documentation
-│
-└── weather.db           # Optional: sample database
-```
-
+-  **Global City Search** — look up weather anywhere in the world  
+-  **Fuzzy Matching** — find cities even with partial or misspelled names  
+-  **Smart Fallbacks** — uses database first, then live API if needed  
+-  **Rich Terminal UI** — optional color tables, borders, and panels  
+-  **Streamlit Web UI** — clean, interactive dashboard  
+-  **ETL Pipeline** — fetches and stores real‑time weather data  
+-  **Auto‑Create DB** — no setup needed; the app builds the DB for you  
 ---
 
-# 🚀 Getting Started
+#  Getting Started
 
-## 1️⃣ Install dependencies
+##  Install dependencies
 
-```
+```bash
 pip install -r requirements.txt
 ```
 
 Optional enhancements:
 
-```
+```bash
 pip install rich rapidfuzz
 ```
 
 - `rich` → color UI  
 - `rapidfuzz` → fuzzy search  
-- Both optional — the app still works without them.
+
+Both optional — the app still works without them.
 
 ---
 
-# 🗄️ Database Handling
+#  Database Handling
 
-### ✔ Automatic database creation  
+###  Automatic database creation  
 If `weather.db` is missing, the launcher will automatically run:
 
-```
-init_db.py
+```bash
+python init_db.py
 ```
 
 This creates the correct table structure with no user action required.
 
-### ✔ Reset Database  
+###  Reset Database  
 The launcher includes a safe option to:
 
 - Delete `weather.db`  
@@ -73,7 +54,7 @@ Useful for testing or starting fresh.
 
 ---
 
-# 🧪 Diagnostics Mode
+#  Diagnostics Mode
 
 The launcher includes a full diagnostics suite that checks:
 
@@ -96,11 +77,11 @@ Example output:
 
 ---
 
-# 🏗️ Running the App
+#  Running the App
 
 Use the launcher to choose your interface:
 
-```
+```bash
 python launcher.py
 ```
 
@@ -118,11 +99,11 @@ You’ll see:
 
 ---
 
-# 🖥️ Terminal Viewer Features
+#  Terminal Viewer Features
 
 The terminal UI (`terminal_app.py`) includes:
 
-### 🌍 Global City Search  
+###  Global City Search  
 Type **any** city name:
 
 - `tokyo`
@@ -132,22 +113,22 @@ Type **any** city name:
 
 If the city isn’t in the database, the app fetches **live weather** using Open‑Meteo.
 
-### 🔍 Fuzzy Search  
+###  Fuzzy Search  
 Even messy inputs work:
 
 - `ldn` → London  
 - `brln` → Berlin  
 - `ams` → Amsterdam  
 
-### 🌤️ Weather Icons  
+###  Weather Icons  
 Weather conditions are displayed with emoji:
 
-- ☀️ Clear sky  
-- 🌧️ Rain  
-- 🌨️ Snow  
-- ⛈️ Thunderstorm  
+-  Clear sky  
+-  Rain  
+-  Snow  
+-  Thunderstorm  
 
-### 🎨 Rich UI (optional)  
+###  Rich UI (optional)  
 If `rich` is installed:
 
 - Color tables  
@@ -158,31 +139,31 @@ If not installed → plain fallback.
 
 ---
 
-# 🌐 Web UI (Streamlit)
+#  Web UI (Streamlit)
 
-Launch with:
+Launch manually:
 
-```
+```bash
 python -m streamlit run web_app.py
 ```
 
 Or choose **Web UI** from the launcher.
 
-### ✔ Auto‑install Streamlit  
+### Auto‑install Streamlit  
 If Streamlit is missing, the launcher will offer to install it.
 
-### ✔ Features  
+###  Features  
 - Dropdown city selector  
 - Weather display  
 - Clean, simple interface  
 
 ---
 
-# 🏗️ ETL Pipeline
+#  ETL Pipeline
 
 Run manually:
 
-```
+```bash
 python main.py
 ```
 
@@ -196,12 +177,88 @@ The ETL:
 
 ---
 
-# 🧹 Resetting the Project
+#  Resetting the Project
 
 To completely reset:
 
 1. Choose **Reset Database** in the launcher  
 2. Run **Run ETL Now**  
 3. Launch Terminal or Web UI  
+
+---
+
+#  How to Download the Project
+
+
+##  Download ZIP
+
+1. Go to the repository page  
+2. Click the green **Code** button  
+3. Select **Download ZIP**  
+4. Extract the ZIP file  
+5. Open a terminal inside the extracted folder  
+
+
+---
+
+#  How to Run the App
+
+Once downloaded or cloned:
+
+###  Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+Optional (recommended):
+
+```bash
+pip install rich rapidfuzz
+```
+
+###  Launch the app
+
+```bash
+python launcher.py
+```
+
+You’ll see:
+
+```
+=== Weather App Launcher ===
+1. Terminal Viewer
+2. Web UI
+3. Run ETL Now
+4. Diagnostics
+5. Reset Database
+6. Exit
+```
+
+Choose an option and enjoy the app.
+
+---
+
+#  Manual Commands (Optional)
+
+### Run Terminal UI:
+```bash
+python terminal_app.py
+```
+
+### Run Web UI:
+```bash
+python -m streamlit run web_app.py
+```
+
+### Run ETL:
+```bash
+python main.py
+```
+
+### Create database manually:
+```bash
+python init_db.py
+```
 
 ---
