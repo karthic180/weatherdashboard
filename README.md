@@ -1,240 +1,197 @@
-#  Weather App — ETL + Terminal UI + Web UI
----
+## Weather Dashboard
+ 
+A cross‑platform weather data pipeline and dashboard built with Python.
+It fetches live weather data for European cities, stores it in SQLite, and provides both a terminal interface and a Streamlit web UI for viewing conditions in Celsius and Fahrenheit, complete with icons + text descriptions.
 
-#  Features at a Glance
+The project includes:
+ETL pipeline (Open‑Meteo API → SQLite)
+Terminal weather viewer with fuzzy search
+Streamlit dashboard
+Docker support
+Full unittest test suite
+Makefile (Linux/macOS)
+Windows automation script (make.bat)
+Weather icons + text fallback
+Celsius + Fahrenheit support
 
--  **Global City Search** — look up weather anywhere in the world  
--  **Fuzzy Matching** — find cities even with partial or misspelled names  
--  **Smart Fallbacks** — uses database first, then live API if needed  
--  **Rich Terminal UI** — optional color tables, borders, and panels  
--  **Streamlit Web UI** — clean, interactive dashboard  
--  **ETL Pipeline** — fetches and stores real‑time weather data  
--  **Auto‑Create DB** — no setup needed; the app builds the DB for you  
----
+##  Features at a Glance
+##  ETL Pipeline
+Fetches live weather for 40+ European cities
+Stores:
+Temperature (°C + °F)
+Weather description (icon + text)
+Timestamp
+Saves everything to SQLite (weather.db)
 
-#  Getting Started
 
-##  Install dependencies
+##  Terminal App
+Fuzzy search for any city
+Falls back to live API lookup if not in DB
+Optional Rich‑formatted output
+Shows °C / °F, icons, and text conditions
 
-```bash
+## Streamlit Web Dashboard
+Browse stored weather
+Perform live lookups
+Displays:
+Temperature (°C / °F)
+Weather icons + text
+Humidity
+Wind speed
+
+##  Testing
+Full unittest suite
+Windows‑safe SQLite handling
+
+Tests for:
+Weather mapping
+Temperature conversion
+ETL DB writes
+Terminal fuzzy search
+Web DB helpers
+
+##  Docker Support
+Build and run ETL, terminal, or web UI inside Docker
+
+## ⚙ Automation
+Makefile (Linux/macOS)
+
+make.bat (Windows)
+
+## Installation (Download Only — No Git Required)
+
+Download the project
+https://github.com/karthic180/weatherdashboard
+
+Click: Code → Download ZIP
+
+Unzip it anywhere on your computer.
+
+Open a terminal in the project folder
+Windows (PowerShell)
+
+powershell
+cd path\to\weatherdashboard
+macOS / Linux
+
+bash
+cd path/to/weatherdashboard
+ (Optional) Create a virtual environment
+Windows
+
+cmd
+python -m venv venv
+venv\Scripts\activate
+macOS / Linux
+
+bash
+python3 -m venv venv
+source venv/bin/activate
+4. Install dependencies
+bash
 pip install -r requirements.txt
-```
+5. Run the apps
+ETL Pipeline
 
-Optional enhancements:
-
-```bash
-pip install rich rapidfuzz
-```
-
-- `rich` → color UI  
-- `rapidfuzz` → fuzzy search  
-
-Both optional — the app still works without them.
-
----
-
-#  Database Handling
-
-###  Automatic database creation  
-If `weather.db` is missing, the launcher will automatically run:
-
-```bash
-python init_db.py
-```
-
-This creates the correct table structure with no user action required.
-
-###  Reset Database  
-The launcher includes a safe option to:
-
-- Delete `weather.db`  
-- Recreate it cleanly  
-
-Useful for testing or starting fresh.
-
----
-
-#  Diagnostics Mode
-
-The launcher includes a full diagnostics suite that checks:
-
-- Required files  
-- Installed dependencies  
-- Database presence  
-- Internet connection  
-- Streamlit availability  
-
-Example output:
-
-```
-=== Diagnostics Report ===
-✔ weather.db exists
-✔ terminal_app.py found
-✔ requests installed
-✖ rich NOT installed (optional)
-✔ Internet connection OK
-```
-
----
-
-#  Running the App
-
-Use the launcher to choose your interface:
-
-```bash
-python launcher.py
-```
-
-You’ll see:
-
-```
-=== Weather App Launcher ===
-1. Terminal Viewer
-2. Web UI
-3. Run ETL Now
-4. Diagnostics
-5. Reset Database
-6. Exit
-```
-
----
-
-#  Terminal Viewer Features
-
-The terminal UI (`terminal_app.py`) includes:
-
-###  Global City Search  
-Type **any** city name:
-
-- `tokyo`
-- `new york`
-- `sydney`
-- `cairo`
-
-If the city isn’t in the database, the app fetches **live weather** using Open‑Meteo.
-
----
-
-#  Web UI (Streamlit)
-
-Launch manually:
-
-```bash
-python -m streamlit run web_app.py
-```
-
-Or choose **Web UI** from the launcher.
-
-### Auto‑install Streamlit  
-If Streamlit is missing, the launcher will offer to install it.
-
-###  Features  
-- Dropdown city selector  
-- Weather display  
-- Clean, simple interface  
-
----
-
-#  ETL Pipeline
-
-Run manually:
-
-```bash
+bash
 python main.py
-```
+Terminal App
 
-Or choose **Run ETL Now** from the launcher.
-
-The ETL:
-
-- Fetches weather for predefined cities  
-- Inserts data into `weather.db`  
-- Updates existing entries  
-
----
-
-#  Resetting the Project
-
-To completely reset:
-
-1. Choose **Reset Database** in the launcher  
-2. Run **Run ETL Now**  
-3. Launch Terminal or Web UI  
-
----
-
-#  How to Download the Project
-
-
-##  Download ZIP
-
-1. Go to the repository page  
-2. Click the green **Code** button  
-3. Select **Download ZIP**  
-4. Extract the ZIP file  
-5. Open a terminal inside the extracted folder  
-
-
----
-
-#  How to Run the App
-
-Once downloaded or cloned:
-
-###  Install dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-Optional (recommended):
-
-```bash
-pip install rich rapidfuzz
-```
-
-###  Launch the app
-
-```bash
-python launcher.py
-```
-
-You’ll see:
-
-```
-=== Weather App Launcher ===
-1. Terminal Viewer
-2. Web UI
-3. Run ETL Now
-4. Diagnostics
-5. Reset Database
-6. Exit
-```
-
-Choose an option and enjoy the app.
-
----
-
-#  Manual Commands (Optional)
-
-### Run Terminal UI:
-```bash
+bash
 python terminal_app.py
-```
+Streamlit Web Dashboard
 
-### Run Web UI:
-```bash
-python -m streamlit run web_app.py
-```
+bash
+streamlit run web_app.py
 
-### Run ETL:
-```bash
-python main.py
-```
 
-### Create database manually:
-```bash
-python init_db.py
-```
+##  Commands
+Linux/macOS (Makefile)
+bash
+make etl
+make terminal
+make web
+make test
+make reset-db
+make docker-build
+make docker-web
 
----
+Windows (make.bat)
+cmd
+make etl
+make terminal
+make web
+make test
+make reset-db
+make docker-build
+make docker-web
+
+##  Docker
+Build the image
+bash
+docker build -t weatherapp .
+Run ETL
+bash
+docker run weatherapp python main.py
+Run Terminal App
+bash
+docker run -it weatherapp python terminal_app.py
+Run Web UI
+bash
+docker run -p 8501:8501 weatherapp streamlit run web_app.py
+
+##  Running Tests (unittest)
+Discover and run all tests
+bash
+python -m unittest discover -v
+Or explicitly:
+bash
+python -m unittest discover -s tests -p "test_*.py" -v
+
+##  Project Structure
+weatherdashboard/
+    main.py                 # ETL pipeline
+    terminal_app.py         # Terminal weather viewer
+    web_app.py              # Streamlit dashboard
+    launcher.py             # Unified launcher
+    Dockerfile
+    requirements.txt
+    Makefile                # Linux/macOS automation
+    make.bat                # Windows automation
+    .gitignore
+
+    tests/                  # unittest suite
+        __init__.py
+        test_weather_mapping.py
+        test_temperature_conversion.py
+        test_etl.py
+        test_terminal_helpers.py
+        test_web_helpers.py
+
+    
+##  Configuration
+Weather Mapping
+Each weather code maps to:
+An emoji icon
+A text description
+
+Example:
+Code
+🌧️ Rain
+☀️ Clear sky
+⛈️ Thunderstorm
+
+Temperature Conversion
+Stored in DB as both °C and °F
+Displayed in both terminal and web UI
+
+##  Requirements
+Python 3.10+
+Streamlit
+Requests
+Rich (optional)
+RapidFuzz (optional)
+Docker (optional)
+
+##  License
+MIT License — free to use, modify, and distribute.
