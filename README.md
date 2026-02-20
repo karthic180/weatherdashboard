@@ -172,6 +172,32 @@ Fetches live weather using latitude/longitude
 
 Displays it instantly
 
+Missing Dependencies
+The terminal viewer automatically detects missing optional packages and informs the user.
+
+If any of these are missing:
+
+rich → color UI disabled
+
+rapidfuzz → fuzzy search disabled
+
+requests → live weather lookup disabled
+
+You will see a message like:
+
+Code
+ Some optional packages are not installed:
+   - rich
+   - rapidfuzz
+
+These features will be limited:
+   • No color UI
+   • No fuzzy search
+
+Install missing packages with:
+   pip install rich rapidfuzz
+The app still works even if all optional packages are missing.
+
 ## 📝 Notes
 
 - Always run the ETL before using the viewers.  
