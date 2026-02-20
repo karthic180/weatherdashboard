@@ -133,24 +133,6 @@ If Streamlit is missing, the launcher will:
 
 ---
 
-## 🔒 Security Features (Optional)
-
-### ✔ Password‑protected ETL  
-Only authorized users can run `main.py`.
-
-### ✔ Read‑only database  
-Prevents modification of stored weather data.
-
-Windows:
-
-- Right‑click `weather.db` → Properties → Read‑only
-
-Linux/macOS:
-
-```
-chmod 444 weather.db
-```
-
 ### ✔ Web UI locked to view‑only  
 No deploy button, no editing, no ETL access.
 
