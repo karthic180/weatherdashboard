@@ -1,208 +1,207 @@
---
-# 🌦️ Weather ETL, Terminal UI & Web UI
 
-This project fetches real‑time weather data for major European cities using the Open‑Meteo API, stores it in a SQLite database, and lets the user view the weather in **two different interfaces**:
+# 🌦️ Weather App — ETL + Terminal UI + Web UI
 
-- A **colorized terminal UI** (with automatic fallback if Rich is not installed)  
-- A **web UI** built with Streamlit  
+A complete weather application that:
 
-A launcher script allows the user to choose which interface to run.  
-If Streamlit is missing, the launcher can automatically install it.
+- Fetches real‑time weather data (ETL pipeline)  
+- Stores it in a SQLite database  
+- Lets users view weather in a **terminal UI** or **web UI**  
+- Supports **global city search**, **fuzzy matching**, and **weather icons**  
+- Includes a powerful **launcher** with diagnostics, ETL, and database tools  
+
+This project is designed to be user‑friendly, robust, and easy to run on any machine.
 
 ---
 
-## 📁 Project Structure
+# 📁 Project Structure
 
 ```
-weather-etl/
+weather-app/
 │
 ├── main.py              # ETL pipeline (fetch + load)
-├── terminal_app.py      # Terminal UI (Rich if installed, plain fallback + Exit option)
+├── terminal_app.py      # Terminal UI (fuzzy search + icons + live API)
 ├── web_app.py           # Streamlit web UI
-├── launcher.py          # Choose terminal or web UI (auto-installs Streamlit)
-├── weather.db           # SQLite database (auto-created by ETL)
+├── launcher.py          # Main menu (Terminal/Web/ETL/Diagnostics/Reset DB)
+├── init_db.py           # Auto-creates weather.db if missing
+│
 ├── requirements.txt     # Dependencies
-└── README.md            # Documentation
+├── README.md            # Documentation
+│
+└── weather.db           # Optional: sample database
 ```
 
 ---
 
-## ⚙️ Installation
+# 🚀 Getting Started
 
-Install all required packages:
+## 1️⃣ Install dependencies
 
 ```
 pip install -r requirements.txt
 ```
 
-Optional (for colorized terminal UI):
+Optional enhancements:
 
 ```
-pip install rich
+pip install rich rapidfuzz
 ```
 
-If Streamlit is not recognized on Windows:
+- `rich` → color UI  
+- `rapidfuzz` → fuzzy search  
+- Both optional — the app still works without them.
+
+---
+
+# 🗄️ Database Handling
+
+### ✔ Automatic database creation  
+If `weather.db` is missing, the launcher will automatically run:
 
 ```
-python -m pip install streamlit
+init_db.py
+```
+
+This creates the correct table structure with no user action required.
+
+### ✔ Reset Database  
+The launcher includes a safe option to:
+
+- Delete `weather.db`  
+- Recreate it cleanly  
+
+Useful for testing or starting fresh.
+
+---
+
+# 🧪 Diagnostics Mode
+
+The launcher includes a full diagnostics suite that checks:
+
+- Required files  
+- Installed dependencies  
+- Database presence  
+- Internet connection  
+- Streamlit availability  
+
+Example output:
+
+```
+=== Diagnostics Report ===
+✔ weather.db exists
+✔ terminal_app.py found
+✔ requests installed
+✖ rich NOT installed (optional)
+✔ Internet connection OK
 ```
 
 ---
 
-## 🏗️ Step 1 — Run the ETL Pipeline
+# 🏗️ Running the App
 
-Before using the viewers, populate the database:
-
-```
-python main.py
-```
-
-This will:
-
-- Fetch weather for all supported European cities  
-- Create `weather.db` if it doesn’t exist  
-- Insert the latest weather records  
-
-If ETL password protection is enabled, you will be prompted to enter it.
-
----
-
-## 🚀 Step 2 — Choose Terminal or Web UI
-
-Use the launcher:
+Use the launcher to choose your interface:
 
 ```
 python launcher.py
 ```
 
-You will see:
+You’ll see:
 
 ```
 === Weather App Launcher ===
 1. Terminal Viewer
 2. Web UI
-3. Exit
+3. Run ETL Now
+4. Diagnostics
+5. Reset Database
+6. Exit
 ```
 
 ---
 
-## 🖥️ Option 1 — Terminal Viewer
+# 🖥️ Terminal Viewer Features
 
-Runs a text‑based interface directly in the terminal:
+The terminal UI (`terminal_app.py`) includes:
 
-```
-python terminal_app.py
-```
+### 🌍 Global City Search  
+Type **any** city name:
 
-### ✔ If Rich is installed  
-You get a full color UI with tables, panels, and styled output.
+- `tokyo`
+- `new york`
+- `sydney`
+- `cairo`
 
-### ✔ If Rich is NOT installed  
-The app automatically falls back to a simple plain‑text interface.
+If the city isn’t in the database, the app fetches **live weather** using Open‑Meteo.
 
-### ✔ Exit option  
-Type:
+### 🔍 Fuzzy Search  
+Even messy inputs work:
 
-- `0`  
-- `exit`  
-- `quit`  
-- `q`  
+- `ldn` → London  
+- `brln` → Berlin  
+- `ams` → Amsterdam  
 
-…to leave the viewer.
+### 🌤️ Weather Icons  
+Weather conditions are displayed with emoji:
+
+- ☀️ Clear sky  
+- 🌧️ Rain  
+- 🌨️ Snow  
+- ⛈️ Thunderstorm  
+
+### 🎨 Rich UI (optional)  
+If `rich` is installed:
+
+- Color tables  
+- Borders  
+- Panels  
+
+If not installed → plain fallback.
 
 ---
 
-## 🌐 Option 2 — Web UI (Streamlit)
+# 🌐 Web UI (Streamlit)
 
-Runs the interactive dashboard:
+Launch with:
 
 ```
 python -m streamlit run web_app.py
 ```
 
-### ✔ Auto‑open browser  
-The launcher forces Streamlit to open the browser automatically.
+Or choose **Web UI** from the launcher.
 
 ### ✔ Auto‑install Streamlit  
-If Streamlit is missing, the launcher will:
+If Streamlit is missing, the launcher will offer to install it.
 
-1. Detect it  
-2. Ask if you want to install it  
-3. Install it automatically  
-4. Launch the Web UI  
+### ✔ Features  
+- Dropdown city selector  
+- Weather display  
+- Clean, simple interface  
+
+---
+
+# 🏗️ ETL Pipeline
+
+Run manually:
+
+```
+python main.py
+```
+
+Or choose **Run ETL Now** from the launcher.
+
+The ETL:
+
+- Fetches weather for predefined cities  
+- Inserts data into `weather.db`  
+- Updates existing entries  
 
 ---
 
-### ✔ Web UI locked to view‑only  
-No deploy button, no editing, no ETL access.
+# 🧹 Resetting the Project
 
----
-🌍 Global City Search (Fuzzy + Live API)
-The terminal viewer now supports global weather search.
+To completely reset:
 
-✔ Type ANY city name
-Examples:
-
-tokyo
-
-new york
-
-sydney
-
-cairo
-
-✔ Fuzzy matching
-Even messy inputs work:
-
-ldn → London
-
-brln → Berlin
-
-ams → Amsterdam
-
-✔ If the city exists in your database
-The viewer shows the stored weather.
-
-✔ If the city is NOT in your database
-The viewer automatically:
-
-Uses Open‑Meteo’s Geocoding API to find the city
-
-Fetches live weather using latitude/longitude
-
-Displays it instantly
-
-Missing Dependencies
-The terminal viewer automatically detects missing optional packages and informs the user.
-
-If any of these are missing:
-
-rich → color UI disabled
-
-rapidfuzz → fuzzy search disabled
-
-requests → live weather lookup disabled
-
-You will see a message like:
-
-Code
- Some optional packages are not installed:
-   - rich
-   - rapidfuzz
-
-These features will be limited:
-   • No color UI
-   • No fuzzy search
-
-Install missing packages with:
-   pip install rich rapidfuzz
-The app still works even if all optional packages are missing.
-
-## 📝 Notes
-
-- Always run the ETL before using the viewers.  
-- The terminal viewer and web UI are **read‑only**.  
-- Rich is optional — the app works perfectly without it.  
-- The launcher provides a simple, user‑friendly interface.  
+1. Choose **Reset Database** in the launcher  
+2. Run **Run ETL Now**  
+3. Launch Terminal or Web UI  
 
 ---
