@@ -137,6 +137,40 @@ If Streamlit is missing, the launcher will:
 No deploy button, no editing, no ETL access.
 
 ---
+🌍 Global City Search (Fuzzy + Live API)
+The terminal viewer now supports global weather search.
+
+✔ Type ANY city name
+Examples:
+
+tokyo
+
+new york
+
+sydney
+
+cairo
+
+✔ Fuzzy matching
+Even messy inputs work:
+
+ldn → London
+
+brln → Berlin
+
+ams → Amsterdam
+
+✔ If the city exists in your database
+The viewer shows the stored weather.
+
+✔ If the city is NOT in your database
+The viewer automatically:
+
+Uses Open‑Meteo’s Geocoding API to find the city
+
+Fetches live weather using latitude/longitude
+
+Displays it instantly
 
 ## 📝 Notes
 
