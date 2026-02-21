@@ -9,34 +9,18 @@ It fetches live weather data for European cities, stores it in SQLite, and provi
 
 ## Project Includes
 
-- ETL pipeline (Open‑Meteo API → SQLite)  
-- Terminal weather viewer with fuzzy search  
+- Terminal weather viewer
 - Streamlit dashboard  
-- Docker support  
 - Full unittest test suite  
-- Makefile (Linux/macOS)  
-- Windows automation script (`make.bat`)  
-- Celsius + Fahrenheit support  
 
 ---
 
 ##  Features at a Glance
 
-###  ETL Pipeline
-- Fetches live weather for 40+ European cities  
-- Stores:
-  - Temperature (°C and °F)  
-  - Weather description (text)  
-  - Timestamp  
-- Saves all data to SQLite (`weather.db`)
-
----
 
 ### Terminal App
-- Fuzzy search for any city  
 - Falls back to live API lookup if city not in DB  
 - Optional Rich‑formatted output  
-- Displays °C/°F and text weather conditions  
 
 **Example Terminal Output:**
 ```
@@ -260,29 +244,6 @@ python -m unittest discover -s tests -p "test_*.py" -v
 
 ---
 
-#  Project Structure
-
-```
-weatherdashboard/
-    main.py
-    terminal_app.py
-    web_app.py
-    launcher.py
-    Dockerfile
-    requirements.txt
-    Makefile
-    make.bat
-    .gitignore
-    tests/
-        __init__.py
-        test_weather_mapping.py
-        test_temperature_conversion.py
-        test_etl.py
-        test_terminal_helpers.py
-        test_web_helpers.py
-```
-
----
 
 #  Configuration
 
@@ -300,6 +261,13 @@ Thunderstorm
 - Displayed in both terminal and web UI  
 
 ---
+## Notes
+The project uses Open‑Meteo, a free, no‑signup weather API.
+
+The launcher automatically deletes weather.db before starting the web UI.
+
+The UI is intentionally minimal and fast — no animations, no heavy styling.
+
 
 #  Requirements
 
@@ -311,8 +279,28 @@ Thunderstorm
 - Docker (optional)  
 
 ---
+## Requirements
+Code
+streamlit
+requests
+pytest
+SQLite is built into Python — no install needed.
+
+## Technologies Used
+Python 3.10+
+
+Streamlit
+
+Requests
+
+SQLite
+
+Pytest
+
+VS Code
 
 #  License
 
 MIT License — free to use, modify, and distribute.
+
 
