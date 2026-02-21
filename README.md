@@ -21,37 +21,7 @@ It fetches live weather data for European cities, stores it in SQLite, and provi
 ### Terminal App
 - Falls back to live API lookup if city not in DB  
 - Optional Rich‑formatted output  
-
-**Example Terminal Output:**
-```
-Weather for Berlin:
-Temperature: 18°C / 64°F
-Conditions: Clear sky
-Humidity: 55%
-Wind Speed: 12 km/h
-```
-
----
-
-###  Streamlit Web Dashboard
-- Browse stored weather  
-- Perform live lookups  
-- Displays:
-  - Temperature (°C / °F)  
-  - Weather description  
-  - Humidity  
-  - Wind speed  
-
-**Example Web UI Output:**
-```
-City: Paris
-Temperature: 21°C / 70°F
-Conditions: Partly cloudy
-Humidity: 48%
-Wind Speed: 10 km/h
-```
-
----
+-
 
 #  Screenshots
 
@@ -107,20 +77,6 @@ Timestamp: 2024‑01‑01 12:00 UTC
 ```
 
 ---
-
-##  Docker Support
-
-- Build and run ETL, terminal, or web UI inside Docker
-
----
-
-## Automation
-
-- Makefile (Linux/macOS)  
-- `make.bat` (Windows)
-
----
-
 #  Installation (Download Only — No Git Required)
 
 ### 1. Download the project  
