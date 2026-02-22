@@ -1,0 +1,6 @@
+streamlit
+requests
+pytest
+black
+flake8
+pytest
